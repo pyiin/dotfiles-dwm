@@ -1,0 +1,7 @@
+#! /bin/bash
+#b=$(xclip -o) && cat $HOME/.local/bin/translate/ang4 | grep $b
+#b=$1 && cat $HOME/.local/bin/translate/ang4 | grep $b && read a
+b=$1
+c=$(cat $HOME/.local/bin/translate/ang4 | grep $b)
+echo -e $c
+read a

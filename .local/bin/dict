@@ -1,0 +1,15 @@
+#!/bin/sh
+TPATH=$HOME$(echo "/.local/bin/translate")
+p=$(sed -n '/^[A-Z;->]\+.$/p' $TPATH/dictionary | sed -e 's/\(.*\)/\L\1/' | sed -e 's/^.//' -e 's/.$//' | dmenu) # get searchable term
+q=$(echo $p | sed 's/[a-z]/\U&/g') # to uppercase
+
+sed "0,/^>$q.$/d" < $TPATH/dictionary > $TPATH/temp1 # delete everything up to term
+cat $TPATH/temp1 | sed '/>/,$d' > $TPATH/temp2 # delete everything after term
+
+r="\033[32;1m" #colours
+s="\033[0m" #colours
+
+echo -e $r$(echo $p | sed 's/^[a-z]/\U&/g')$s #capitalise first term
+#cat temp1
+cat $TPATH/temp2 #print definition
+read a
